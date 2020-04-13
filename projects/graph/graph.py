@@ -93,13 +93,13 @@ class Graph:
 
         This should be done using recursion.
         """
-        # 
+        # Create a set for visited vertices
         if visited is None:
             visited = set()
-
+        # Print the vertex and add to visited set
         print(starting_vertex)
         visited.add(starting_vertex)
-
+        # Recurse through the neighbors that are not in the visited set
         for neighbor in self.get_neighbors(starting_vertex):
             if neighbor not in visited:
                 self.dft_recursive(neighbor, visited)
@@ -160,7 +160,7 @@ class Graph:
                         new_path = path + [neighbor]
                         stack.push(new_path)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited=None, path=None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -168,7 +168,25 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # Create a set for visited vertices
+        if visited is None:
+            visited = set()
+        # Create a path if path is null or append starting vertex to existing path
+        if path is None:
+            path = [starting_vertex]
+        else:
+            path = path + [starting_vertex]
+        # Check if at destination vertex
+        if path[-1] == destination_vertex:
+            return path
+        # Add to visited set
+        visited.add(starting_vertex)
+        # Recurse through the neighbors that are not in the visited set
+        for neighbor in self.get_neighbors(starting_vertex):
+            if neighbor not in visited:
+                new_path = self.dfs_recursive(neighbor, destination_vertex, visited, path)
+                if new_path is not None:
+                    return new_path
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
