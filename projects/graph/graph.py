@@ -66,7 +66,7 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        
 
     def dft_recursive(self, starting_vertex):
         """
