@@ -59,12 +59,12 @@ def get_longest_path(starting_vertex, vertices):
                         new_path = path + [parent]
                         stack.push(new_path)
 
-    return_path = []
+    longest_paths = []
     # Get the longests paths
     for path in paths:
         if len(path) >= len(return_path):
-            return_path.append(path)
-    return return_path
+            longest_paths.append(path)
+    return longest_paths
 
 # helper functions to get parents
 def get_parents(vertex_id, vertices):
