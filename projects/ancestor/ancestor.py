@@ -20,7 +20,7 @@ def earliest_ancestor(ancestors, starting_node):
     for parent in parents:
         # get ancestors of each parents
         ancestor_lists = get_longest_path(parent, vertices)
-        # get the parent list that has the most ancestors
+        # get the ancestor list that has the most ancestors
         for ancestor_list in ancestor_lists:
             if len(ancestor_list) > len(most_ancestors):
                 most_ancestors = ancestor_list
@@ -32,7 +32,7 @@ def earliest_ancestor(ancestors, starting_node):
     
     return most_ancestors[-1]
     
-
+# helper function to get the longest path(s) of ancestors from starting vertex
 def get_longest_path(starting_vertex, vertices):
     # Create a stack and push starting vertex
     stack = Stack()
@@ -52,11 +52,11 @@ def get_longest_path(starting_vertex, vertices):
             # Mark as visited
             visited.add(path[-1])
             # Push all neighbors
-            neighbors = get_neighbors(path[-1], vertices)
-            if neighbors is not None:
-                for neighbor in neighbors:
-                    if neighbor not in visited:
-                        new_path = path + [neighbor]
+            parents = get_parents(path[-1], vertices)
+            if parents is not None:
+                for parent in parents:
+                    if parent not in visited:
+                        new_path = path + [parent]
                         stack.push(new_path)
 
     return_path = []
@@ -66,8 +66,8 @@ def get_longest_path(starting_vertex, vertices):
             return_path.append(path)
     return return_path
 
-
-def get_neighbors(vertex_id, vertices):
+# helper functions to get parents
+def get_parents(vertex_id, vertices):
     if vertex_id in vertices:
         return vertices[vertex_id]
     else:
